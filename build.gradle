@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+	id 'java'
+	id 'eclipse'
+}
+
+group = 'com.mdrsolutions'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url uri('file:///' + new File('C:/Users/pw04097/local-maven-repo').absolutePath) }
+}
+
+dependencies {
+	//implementation 'com.thoughtworks.xstream:xstream:1.4.20'
+	//implementation 'org.springframework:spring-oxm:5.3.27'
+
+	implementation files('libs/spring-oxm-5.3.23.jar')
+	implementation files('libs/spring-core-5.3.23.jar')
+	implementation files('libs/spring-beans-5.3.23.jar')
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-activemq'
+	implementation 'org.apache.activemq:activemq-broker'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+bootJar {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
